@@ -1,8 +1,6 @@
 <?php
 class HomeController extends AppController {
 
-	public $components = array('Connect', 'Configuration');
-
     public function index() {
         $this->set('title_for_layout',"Support");
     	$this->layout = $this->Configuration->getKey('layout');
