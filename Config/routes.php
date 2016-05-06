@@ -1,2 +1,2 @@
 <?php
-Router::connect('/support', array('controller' => 'home', 'action' => 'index', 'plugin' => 'support'));
+Router::connect('/support', array('controller' => 'ticket', 'action' => 'index', 'plugin' => 'support'));
