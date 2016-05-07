@@ -21,9 +21,12 @@
 							<div class="col-md-12" id="ticket-<?= $value['Ticket']['id'] ?>">
 								<div class="panel panel-default">
 								  <div class="panel-body">
-								  	<h3 class="support"><?= $value['Ticket']['title'] ?> <?php if($value['Ticket']['state'] == 1) { echo '<icon style="color: green;" class="fa fa-check" title="'.$Lang->get('RESOLVED').'"></icon>'; } else { echo '<div style="display:inline-block;" id="ticket-state-'.$value['Ticket']['id'].'"><icon class="fa fa-times" style="color:red;" title="'.$Lang->get('UNRESOLVED').'"></icon></div>'; } ?></h3>
-								    <img class="support" src="<?= $this->Html->url(array('controller' => 'API', 'action' => 'get_head_skin/', 'plugin' => false)) ?>/<?= $value['Ticket']['author'] ?>/50" title="<?= $value['Ticket']['author'] ?>">
-								    <div class="pull-right support">
+								  	<h3 class="support">
+                      <?= $value['Ticket']['title'] ?> <?php if($value['Ticket']['state'] == 1) { echo '<icon style="color: green;" class="fa fa-check" title="'.$Lang->get('RESOLVED').'"></icon>'; } else { echo '<div style="display:inline-block;" id="ticket-state-'.$value['Ticket']['id'].'"><icon class="fa fa-times" style="color:red;" title="'.$Lang->get('UNRESOLVED').'"></icon></div>'; } ?>
+                        <span class="pull-right"><small><?= $value['Ticket']['author']?></small></span>
+                    </h3>
+								    <img class="support" src="<?= $this->Html->url(array('controller' => 'API', 'action' => 'get_head_skin', 'plugin' => false, $value['Ticket']['author'], 80)) ?>" title="<?= $value['Ticket']['author'] ?>">
+								    <div class="pull-right">
 								    	<?php if($isConnected AND $user['isAdmin'] OR $isConnected AND $user['pseudo'] == $value['Ticket']['author'] AND $Permissions->can('DELETE_HIS_TICKET') OR $Permissions->can('DELETE_ALL_TICKETS')) { ?>
 									    <p><a id="<?= $value['Ticket']['id'] ?>" title="<?= $Lang->get('GLOBAL__DELETE') ?>" class="ticket-delete btn btn-danger btn-sm"><icon class="fa fa-times"></icon></a></p>
 									    <?php } ?>
