@@ -4,7 +4,7 @@
 	"nav":true,
 	"admin":false,
 	"author":"Eywek",
-	"version":"0.3.1",
+	"version":"0.3.2",
 	"apiID":2,
 	"useEvents":false,
 	"permissions" : {
