@@ -1,17 +1,8 @@
 <?php
 App::uses('CakeEvent', 'Event');
 
-class ReplyTicket extends SupportAppModel {
+class ReplyTicket extends AppModel {
 
-	public function afterSave($created, $options = array()) {
-		if($created) {
-			// nouvel enregistrement
-			$this->getEventManager()->dispatch(new CakeEvent('afterReplyToTicket', $this));
-		}
-	}
-
-	public function afterDelete($cascade = true) {
-		$this->getEventManager()->dispatch(new CakeEvent('afterDeleteReply', $this));
-	}
+	public $useTable = "support__reply_tickets";
 
 }

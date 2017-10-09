@@ -1,20 +1,32 @@
 {
 	"name":"Support",
-	"slug":"support",
-	"nav":true,
-	"admin":false,
 	"author":"Eywek",
-	"version":"0.3.2",
+	"version":"1.0.2",
 	"apiID":2,
-	"useEvents":false,
-	"permissions" : {
-		"available" : ["POST_TICKET", "VIEW_TICKETS", "VIEW_ALL_TICKETS", "DELETE_ALL_TICKETS", "DELETE_HIS_TICKET", "RESOLVE_HIS_TICKET", "RESOLVE_ALL_TICKETS", "SHOW_TICKETS_ANWSERS", "REPLY_TO_HIS_TICKETS", "REPLY_TO_ALL_TICKETS"],
-		"default" : {
-			"0" : ["POST_TICKET", "VIEW_TICKETS", "DELETE_HIS_TICKET", "RESOLVE_HIS_TICKET", "SHOW_TICKETS_ANWSERS", "REPLY_TO_HIS_TICKETS"],
-			"2" : ["POST_TICKET", "VIEW_TICKETS", "DELETE_HIS_TICKET", "RESOLVE_HIS_TICKET", "SHOW_TICKETS_ANWSERS", "REPLY_TO_HIS_TICKETS"]
+	"admin_menus": {
+		"Support": {
+		  "index": 2,
+		  "icon": "ticket",
+		  "menu": {
+				"Gérer les tickets": {
+					"icon": "cog",
+					"route": "/admin/support"
+				}
+		  }
 		}
 	},
+	"navbar_routes": {
+		"Support": "/support"
+	},
+	"useEvents":false,
+	"permissions" : {
+	  "available" : [],
+	  "default" : {
+		"0" : [],
+		"2" : []
+	  }
+	},
 	"requirements" : {
-		"CMS" : ">= 1.0.0"
+	  "CMS" : "^1.2.0"
 	}
-}
+  }
