@@ -27,11 +27,13 @@
     "SUPPORT__SUCCESS_CREATE": "Ticket créé avec succès !",
     "SUPPORT__SUCCESS_SEND_ANSWER": "Votre réponse a été envoyé avec succès !",
     "SUPPORT__SUCCESS_CLOSE": "Le ticket a été fermé avec succès !",
-    "SUPPORT__ERROR_PROBLEM_SHORT": "La description de votre problème est trop court ! (400 caractères minimum)",
-    "SUPPORT__ERROR_RESOLVE_SHORT": "La description de votre résolution est trop court ! (400 caractères minimum)",
+    "SUPPORT__ERROR_PROBLEM_SHORT": "La description de votre problème est trop court ! (255 caractères minimum)",
+    "SUPPORT__ERROR_RESOLVE_SHORT": "La description de votre résolution est trop court ! (255 caractères minimum)",
     "SUPPORT__GESTION": "Gestion des Tickets",
     "SUPPORT__TICKET_NOT_EXIST": "Le ticket semble être inexistant !",
     "SUPPORT__NOTIF_CREATE": "a ouvert un ticket !",
     "SUPPORT__NOTIF_ANSWER": "vous a répondu au ticket N°",
-    "SUPPORT__NOTIF_CLOS": "a clôturé le ticket N°"
+    "SUPPORT__NOTIF_CLOS": "a clôturé le ticket N°",
+
+    "PERMISSIONS__MANAGE_TICKETS": "Gérer les tickets du support"
 }

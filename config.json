@@ -8,6 +8,7 @@
 			"Support": {
 				"index": 2,
 				"icon": "ticket",
+				"permission": "MANAGE_TICKETS",
 				"menu": {
 					"Gérer les tickets": {
 						"icon": "cog",
@@ -22,7 +23,7 @@
 	},
 	"useEvents":false,
 	"permissions" : {
-	  "available" : [],
+	  "available" : ["MANAGE_TICKETS"],
 	  "default" : {
 		"0" : [],
 		"2" : []
