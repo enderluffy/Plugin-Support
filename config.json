@@ -4,15 +4,17 @@
 	"version":"1.0.2",
 	"apiID":2,
 	"admin_menus": {
-		"Support": {
-		  "index": 2,
-		  "icon": "ticket",
-		  "menu": {
-				"Gérer les tickets": {
-					"icon": "cog",
-					"route": "/admin/support"
+		"GLOBAL__ADMIN_GENERAL": {
+			"Support": {
+				"index": 2,
+				"icon": "ticket",
+				"menu": {
+					"Gérer les tickets": {
+						"icon": "cog",
+						"route": "/admin/support"
+					}
 				}
-		  }
+			}
 		}
 	},
 	"navbar_routes": {
