@@ -1,6 +1,6 @@
 
-<?php 
-App::import('Controller', 'TicketController'); 
+<?php
+App::import('Controller', 'TicketController');
 $TicketSupport = new TicketController();
 ?>
 <section class="content">
@@ -43,14 +43,26 @@ $TicketSupport = new TicketController();
                             </td>
                             <td><?= date('d m Y', $ticket['Ticket']['created']); ?></td>
                             <td>
+                                <div class="col-sm-2">
+                                  <a style="margin-right: 10px;" class="btn btn-primary" href="<?= $this->Html->url(array('plugin' => null, 'admin' => true, 'controller' => 'support', 'action' => 'ticket', $ticket['Ticket']['id'])); ?>">
+                                      <i class="fa fa-eye"></i> Voir
+                                  </a>
+                                </div>
                                 <?php if($ticket['Ticket']['state'] == 0 || $ticket['Ticket']['state'] == 1){ ?>
-                                <form method="post" class="form-horizontal" data-ajax="true" data-redirect-url="?" action="<?= $this->Html->url(array('controller' => 'Ticket', 'action' => 'ajax_closa')) ?>">
-                                    <a class="btn btn-primary" href="<?= $this->Html->url(array('plugin' => null, 'admin' => true, 'controller' => 'support', 'action' => 'ticket', $ticket['Ticket']['id'])); ?>">Voir</a>
-                                    <input type="hidden" name="idTicket" value="<?= $ticket['Ticket']['id']; ?>">
-                                    <button type="submit" class="btn btn-success" href="#"><?= $Lang->get('SUPPORT__CLOSE') ?></button>
-                                </form>
-                                <?php }else{ ?>
-                                    <a class="btn btn-primary" href="<?= $this->Html->url(array('plugin' => null, 'admin' => true, 'controller' => 'support', 'action' => 'ticket', $ticket['Ticket']['id'])); ?>">Voir</a>
+                                    <div class="col-sm-2">
+                                      <form style="margin-right: 10px;" method="post" class="form-horizontal" data-ajax="true" data-redirect-url="?" action="<?= $this->Html->url(array('controller' => 'Ticket', 'action' => 'ajax_closa')) ?>">
+                                          <input type="hidden" name="idTicket" value="<?= $ticket['Ticket']['id']; ?>">
+                                          <button type="submit" class="btn btn-success" href="#"><i class="fa fa-bookmark"></i> <?= $Lang->get('SUPPORT__CLOSE') ?></button>
+                                      </form>
+                                    </div>
+                                <?php }?>
+                                <?php if($Permissions->can('DELETE_TICKETS')){ ?>
+                                  <div class="col-sm-2">
+                                    <form style="margin-right: 10px;" method="post" data-ajax="true" data-redirect-url="?" action="<?= $this->Html->url(array('controller' => 'Ticket', 'action' => 'ajax_delete')) ?>">
+                                        <input type="hidden" name="idTicket" value="<?= $ticket['Ticket']['id']; ?>">
+                                        <button type="submit" class="btn btn-danger" href="#"><i class="fa fa-remove"></i> <?= $Lang->get('SUPPORT__DELETE') ?></button>
+                                    </form>
+                                  </div>
                                 <?php }?>
                             </td>
                         </tr>

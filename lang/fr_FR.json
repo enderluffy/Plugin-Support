@@ -11,6 +11,7 @@
     "SUPPORT__ACTIONS": "Actions",
     "SUPPORT__SHOW": "Voir",
     "SUPPORT__CLOSE": "Clôturer",
+    "SUPPORT__DELETE": "Supprimer",
     "SUPPORT__PROBLEMQUESTION": "Problème / Question de",
     "SUPPORT__CREATEDATE": "Envoyé le",
     "SUPPORT__ANSWERTO": "Réponse de ",
@@ -27,13 +28,15 @@
     "SUPPORT__SUCCESS_CREATE": "Ticket créé avec succès !",
     "SUPPORT__SUCCESS_SEND_ANSWER": "Votre réponse a été envoyé avec succès !",
     "SUPPORT__SUCCESS_CLOSE": "Le ticket a été fermé avec succès !",
-    "SUPPORT__ERROR_PROBLEM_SHORT": "La description de votre problème est trop court ! (255 caractères minimum)",
-    "SUPPORT__ERROR_RESOLVE_SHORT": "La description de votre résolution est trop court ! (255 caractères minimum)",
+    "SUPPORT__SUCCESS_DELETE": "Le ticket a été supprimé avec succès !",
+    "SUPPORT__ERROR_PROBLEM_SHORT": "La description de votre problème est trop court ! (50 caractères minimum)",
+    "SUPPORT__ERROR_RESOLVE_EMPTY": "La description de votre résolution est vide !",
     "SUPPORT__GESTION": "Gestion des Tickets",
     "SUPPORT__TICKET_NOT_EXIST": "Le ticket semble être inexistant !",
     "SUPPORT__NOTIF_CREATE": "a ouvert un ticket !",
     "SUPPORT__NOTIF_ANSWER": "vous a répondu au ticket N°",
     "SUPPORT__NOTIF_CLOS": "a clôturé le ticket N°",
 
-    "PERMISSIONS__MANAGE_TICKETS": "Gérer les tickets du support"
+    "PERMISSIONS__MANAGE_TICKETS": "Gérer les tickets du support",
+    "PERMISSIONS__DELETE_TICKETS": "Supprimer les tickets du support"
 }

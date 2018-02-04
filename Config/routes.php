@@ -8,5 +8,5 @@ Router::connect('/support', array('controller' => 'Ticket', 'action' => 'index',
 Router::connect('/support/ajax_create', array('controller' => 'Ticket', 'action' => 'ajax_create', 'plugin' => 'Support', 'admin' => false));
 Router::connect('/support/ticket/ajax_reply', array('controller' => 'Ticket', 'action' => 'ajax_reply', 'plugin' => 'Support', 'admin' => false));
 Router::connect('/support/create', array('controller' => 'Ticket', 'action' => 'create', 'plugin' => 'Support'));
+Router::connect('/admin/support/ajax_delete', array('controller' => 'Ticket', 'action' => 'ajax_delete', 'plugin' => 'Support', 'admin' => true));
 Router::connect('/support/ticket/*', array('controller' => 'Ticket', 'action' => 'ticket', 'plugin' => 'Support'));
-

@@ -78,7 +78,7 @@ class TicketController extends AppController
         if (empty($this->request->data['subject']) || empty($this->request->data['reponse_text']))
             return $this->sendJSON(['statut' => false, 'msg' => $this->Lang->get('ERROR__FILL_ALL_FIELDS')]);
         $contentTicket = $this->request->data['reponse_text'];
-        if (strlen($contentTicket) < 255)
+        if (strlen($contentTicket) < 50)
             return $this->sendJSON(['statut' => false, 'msg' => $this->Lang->get('SUPPORT__ERROR_PROBLEM_SHORT')]);
 
         $this->loadModel('Support.Ticket');
@@ -94,6 +94,25 @@ class TicketController extends AppController
         $this->sendJSON(['statut' => true, 'msg' => $this->Lang->get('SUPPORT__SUCCESS_CREATE')]);
     }
 
+    function admin_ajax_delete()
+    {
+        if (!$this->Permissions->can('DELETE_TICKETS'))
+            throw new ForbiddenException();
+        if (!$this->request->is('post'))
+            throw new BadRequestException();
+        $ticket = $this->Ticket->find('first', ['conditions' => ['id' => $this->request->data['idTicket']]]);
+        if (empty($ticket))
+            throw new NotFoundException();
+        $this->loadModel('Support.Ticket');
+        $this->loadModel('Support.ReplyTicket');
+        $this->loadModel('Notification');
+
+        $this->Ticket->delete($ticket['Ticket']['id']);
+        $this->ReplyTicket->deleteAll(array('ReplyTicket.ticket_id' => $ticket['Ticket']['id']), false);
+        $this->Notification->setToUser('Votre ticket N° '.$ticket['Ticket']['id'].' a été supprimé !', $ticket['Ticket']['author']);
+        $this->sendJSON(['statut' => true, 'msg' => $this->Lang->get('SUPPORT__SUCCESS_DELETE')]);
+    }
+
     function admin_ajax_replya()
     {
         if (!$this->Permissions->can('MANAGE_TICKETS'))
@@ -105,27 +124,29 @@ class TicketController extends AppController
             throw new NotFoundException();
 
         $contentAnswer = $this->request->data['reponse_text'];
-        if (strlen($contentAnswer) < 255)
-            $this->sendJSON(['statut' => false, 'msg' => $this->Lang->get('SUPPORT__ERROR_RESOLVE_SHORT')]);
+        if (empty($contentAnswer)){
+            $this->sendJSON(['statut' => false, 'msg' => $this->Lang->get('SUPPORT__ERROR_RESOLVE_EMPTY')]);
+            return;
+        }else{
+            $this->loadModel('Support.Ticket');
+            $this->loadModel('Support.ReplyTicket');
+            $this->loadModel('Notification');
 
-        $this->loadModel('Support.Ticket');
-        $this->loadModel('Support.ReplyTicket');
-        $this->loadModel('Notification');
+            $this->Ticket->read(null, $ticket['Ticket']['id']);
+            $this->Ticket->set(['state' => '1']);
+            $this->Ticket->save();
 
-        $this->Ticket->read(null, $ticket['Ticket']['id']);
-        $this->Ticket->set(['state' => '1']);
-        $this->Ticket->save();
+            $this->ReplyTicket->set([
+                'ticket_id' => $this->request->data['idTicket'],
+                'reply' => $contentAnswer,
+                'author' => $this->User->getKey('id'),
+                'type' => 1
+            ]);
+            $this->ReplyTicket->save();
 
-        $this->ReplyTicket->set([
-            'ticket_id' => $this->request->data['idTicket'],
-            'reply' => $contentAnswer,
-            'author' => $this->User->getKey('id'),
-            'type' => 1
-        ]);
-        $this->ReplyTicket->save();
-
-        $this->Notification->setToUser($this->User->getKey('pseudo') . ' ' . $this->Lang->get('SUPPORT__NOTIF_ANSWER') . ' ' . $ticket['Ticket']['id'] . ' !', $ticket['Ticket']['author']);
-        $this->sendJSON(['statut' => true, 'msg' => $this->Lang->get('SUPPORT__SUCCESS_SEND_ANSWER')]);
+            $this->Notification->setToUser($this->User->getKey('pseudo') . ' ' . $this->Lang->get('SUPPORT__NOTIF_ANSWER') . ' ' . $ticket['Ticket']['id'] . ' !', $ticket['Ticket']['author']);
+            $this->sendJSON(['statut' => true, 'msg' => $this->Lang->get('SUPPORT__SUCCESS_SEND_ANSWER')]);
+        }
     }
 
     function ajax_reply()
@@ -138,29 +159,31 @@ class TicketController extends AppController
         $ticket = $this->Ticket->find('first', ['conditions' => ['id' => $this->request->data['idTicket'], 'author' => $this->User->getKey('id')]]);
         if (empty($ticket))
             throw new NotFoundException();
-
         $contentAnswer = $this->request->data['reponse_text'];
-        if (strlen($contentAnswer) < 255)
-            $this->sendJSON(['statut' => false, 'msg' => $this->Lang->get('SUPPORT__ERROR_RESOLVE_SHORT')]);
+        if ($contentAnswer != null){
+            $this->loadModel('Support.Ticket');
+            $this->loadModel('Support.ReplyTicket');
+            $this->loadModel('Notification');
 
-        $this->loadModel('Support.Ticket');
-        $this->loadModel('Support.ReplyTicket');
-        $this->loadModel('Notification');
+            $this->Ticket->read(null, $ticket['Ticket']['id']);
+            $this->Ticket->set(['state' => 0]);
+            $this->Ticket->save();
 
-        $this->Ticket->read(null, $ticket['Ticket']['id']);
-        $this->Ticket->set(['state' => 0]);
-        $this->Ticket->save();
+            $this->ReplyTicket->set([
+                'ticket_id' => $this->request->data['idTicket'],
+                'reply' => $contentAnswer,
+                'author' => $this->User->getKey('id'),
+                'type' => 0
+            ]);
+            $this->ReplyTicket->save();
 
-        $this->ReplyTicket->set([
-            'ticket_id' => $this->request->data['idTicket'],
-            'reply' => $contentAnswer,
-            'author' => $this->User->getKey('id'),
-            'type' => 0
-        ]);
-        $this->ReplyTicket->save();
+            $this->Notification->setToAdmin($this->User->getKey('pseudo') . ' ' . $this->Lang->get('SUPPORT__NOTIF_ANSWER') . ' ' . $ticket['Ticket']['id'] . ' !');
+            $this->sendJSON(['statut' => true, 'msg' => $this->Lang->get('SUPPORT__SUCCESS_SEND_ANSWER')]);
+        }else{
+          $this->sendJSON(['statut' => false, 'msg' => $this->Lang->get('SUPPORT__ERROR_RESOLVE_EMPTY')]);
+          return;
+        }
 
-        $this->Notification->setToAdmin($this->User->getKey('pseudo') . ' ' . $this->Lang->get('SUPPORT__NOTIF_ANSWER') . ' ' . $ticket['Ticket']['id'] . ' !');
-        $this->sendJSON(['statut' => true, 'msg' => $this->Lang->get('SUPPORT__SUCCESS_SEND_ANSWER')]);
     }
 
     function ajax_clos()

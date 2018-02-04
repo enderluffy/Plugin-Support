@@ -1,8 +1,7 @@
-<?php 
-App::import('Controller', 'TicketController'); 
+<?php
+App::import('Controller', 'TicketController');
 $TicketSupport = new TicketController();
 ?>
-<?= $this->Html->css('Support.jquery.cleditor.css'); ?>
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
@@ -49,10 +48,21 @@ $TicketSupport = new TicketController();
                     </h3>
                 </div>
                 <div class="box-body">
-                    <?php if(!$ticket['Ticket']['state'] == 2){ ?>
+                    <?php if($ticket['Ticket']['state'] != 2){ ?>
                     <form method="post" class="form-horizontal" data-ajax="true" data-redirect-url="../" action="<?= $this->Html->url(array('controller' => 'Ticket', 'action' => 'ajax_reply')) ?>">
                         <input type="hidden" name="idTicket" value="<?= $ticket['Ticket']['id']; ?>">
-                        <textarea id="input" name="reponse_text"></textarea>
+                        <?= $this->Html->script('admin/tinymce/tinymce.min.js') ?>
+                        <script type="text/javascript">
+                        tinymce.init({
+                            selector: "textarea",
+                            height : 300,
+                            width : '100%',
+                            language : 'fr_FR',
+                            plugins: "textcolor code image link",
+                            toolbar: "fontselect fontsizeselect bold italic underline strikethrough link image forecolor backcolor alignleft aligncenter alignright alignjustify cut copy paste bullist numlist outdent indent blockquote code"
+                         });
+                        </script>
+                        <textarea id="editor" name="reponse_text" cols="30" rows="10"></textarea>
                         <br>
                         <button class="btn btn-primary" type="submit"><?= $Lang->get('SUPPORT__REPLY') ?></button>
                     </form>
@@ -64,5 +74,3 @@ $TicketSupport = new TicketController();
         </div>
     </div>
 </div>
-<?= $this->Html->script('Support.jquery.cleditor.min.js'); ?>
-<script>$(document).ready(function() {  $("#input").cleditor();  });  </script>
