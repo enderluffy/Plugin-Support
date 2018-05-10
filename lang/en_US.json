@@ -46,6 +46,15 @@
 		"SUPPORT__NOTIF_CLOS": "closed the ticket N °",
 		"SUPPORT__NOTIF_UNCLOS": "reopened the ticket N °",
 		"SUPPORT__ERROR_PERMISSION_ANSWER": "You do not have permission to reply to tickets.",
+		"SUPPORT__SHOW_EDIT": "View / modify answer suffix",
+		
+		"SUPPORT__WARNING_ALERT": "Support Plugin | Information",
+		"SUPPORT__WARNING_ALERT_MAJ": "This update makes important changes in the source code and you may encounter internal errors.",
+		"SUPPORT__WARNING_ALERT_MAJ_MORE": "Remember to clear the cache properly by deleting the folder <b>app/tmp/cache</b>.",
+		"SUPPORT__TICKET_ETAT_LIST": "Ticket Status List",
+		"SUPPORT__TICKET_TITLE": "Tickets",
+		"SUPPORT__TICKET_NOTHING_ETAT": "No ticket is in the state",
+		"SUPPORT__ACTIONS_DROPDOWN": "Toggle Dropdown",
 
 		"SUPPORT__CATEGORY": "Category",
 		"SUPPORT__CATEGORIE": "Category",
