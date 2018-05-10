@@ -15,7 +15,7 @@ $Support = new SupportController();
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Afficher/Modifier le suffix des réponses</h4>
+        <h4 class="modal-title"><?= $Lang->get('SUPPORT__SHOW_EDIT'); ?></h4>
       </div>
       <div class="modal-body">
 		<h4>Aperçu</h4>
@@ -25,8 +25,8 @@ $Support = new SupportController();
         </blockquote>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary">Modifier</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?= $Lang->get('SUPPORT__CLOSED'); ?></button>
+        <button type="button" class="btn btn-primary"><?= $Lang->get('SUPPORT__MODIFY'); ?></button>
       </div>
     </div>
   </div>

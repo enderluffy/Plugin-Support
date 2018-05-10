@@ -46,6 +46,15 @@
     "SUPPORT__NOTIF_CLOS": "a clôturé le ticket N°",
     "SUPPORT__NOTIF_UNCLOS": "a réouvert le ticket N°",
     "SUPPORT__ERROR_PERMISSION_ANSWER": "Vous n'avez pas l'autorisation de répondre aux tickets.",
+	
+	"SUPPORT__SHOW_EDIT": "Afficher/Modifier le suffix des réponses",
+	"SUPPORT__WARNING_ALERT": "Support Plugin | Information",
+	"SUPPORT__WARNING_ALERT_MAJ": "Cette màj apporte des modifications importantes dans le code source et vous pouvez rencontrer des erreurs internes.",
+	"SUPPORT__WARNING_ALERT_MAJ_MORE": "Pensez à vider le cache correctement en supprimant le dossier <b>app/tmp/cache</b>.",
+	"SUPPORT__TICKET_ETAT_LIST": "Liste des états de ticket",
+	"SUPPORT__TICKET_TITLE": "Tickets",
+	"SUPPORT__TICKET_NOTHING_ETAT": "Aucun ticket n'est dans l'état",
+	"SUPPORT__ACTIONS_DROPDOWN": "Menu déroulant Avtivé",
 
     "SUPPORT__CATEGORIE": "Catégorie",
     "SUPPORT__CATEGOIRE_EMPTY_NAME": "Le nom de la catégorie ne doit pas être vide !",
@@ -72,4 +81,5 @@
     "PERMISSIONS__EDIT_CATEGORIE": "Éditer les catégories",
     "PERMISSIONS__DELETE_CATEGORIE": "Supprimer les catégories du support",
 	"PERMISSIONS__SETTINGS_SUPPORT": "Paramètres du support"
+	
 }
