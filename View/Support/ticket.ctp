@@ -7,12 +7,12 @@ $Support = new SupportController();
         <div class="col-sm-12">
             <?php if($ticket['Ticket']['state'] == 0 || $ticket['Ticket']['state'] == 1){ ?>
             <form method="post" class="form-horizontal" data-ajax="true" data-redirect-url="../" action="<?= $this->Html->url(array('controller' => 'Support', 'action' => 'ajax_clos')) ?>">
-                <a class="btn btn-info" href="<?= $this->Html->url(array('controller' => 'Support', 'admin' => false, 'action' => 'index')) ?>"><i class="fa fa-arrow-left"></i> <?= $Lang->get('SUPPORT_BACK_TO_LIST'); ?></a>
+                <a class="btn btn-primary" href="<?= $this->Html->url(array('controller' => 'Support', 'admin' => false, 'action' => 'index')) ?>"><i class="fa fa-arrow-left"></i> <?= $Lang->get('SUPPORT_BACK_TO_LIST'); ?></a>
                 <input type="hidden" name="idTicket" value="<?= $ticket['Ticket']['id']; ?>">
                 <button class="btn btn-success" type="submit"><i class="fa fa-close"></i> <?= $Lang->get('SUPPORT__CLOSE'); ?></button>
             </form>
             <?php }else{ ?>
-                <a class="btn btn-info" href="<?= $this->Html->url(array('controller' => 'Support', 'admin' => false, 'action' => 'index')) ?>"><i class="fa fa-arrow-left"></i> <?= $Lang->get('SUPPORT_BACK_TO_LIST'); ?></a>
+                <a class="btn btn-primary" href="<?= $this->Html->url(array('controller' => 'Support', 'admin' => false, 'action' => 'index')) ?>"><i class="fa fa-arrow-left"></i> <?= $Lang->get('SUPPORT_BACK_TO_LIST'); ?></a>
             <?php }?>
             <h2><?= $Lang->get('SUPPORT__PROBLEMQUESTION', ['{ID_TICKET}' => $ticket['Ticket']['id']]) ?> <?= $Support->getUser('pseudo', $ticket['Ticket']['author']); ?></h2>
             <h4><?= $Lang->get('SUPPORT__IN_A_CATEGORIE', ['{NAME}' => $Support->getCategorie($ticket['Ticket']['categorie'])]); ?></h4>
@@ -36,7 +36,7 @@ $Support = new SupportController();
                     <?= $answer['ReplyTicket']['reply']; ?>
                 </div>
                 <div class="panel-footer">
-                    <?= $Lang->get('SUPPORT__CREATEDATE') ?> <?= date('d/m/Y à H:m:s', strtotime($answer['ReplyTicket']['created'])); ?>
+                    <?= $Lang->get('SUPPORT__CREATEDATE') ?> <?= date('d m Y', $answer['ReplyTicket']['created']); ?>
                 </div>
             </div>
         </div>
@@ -65,10 +65,10 @@ $Support = new SupportController();
                         </script>
                         <textarea id="editor" name="reponse_text" cols="30" rows="10"></textarea>
                         <br>
-                        <button class="btn btn-info" type="submit"><?= $Lang->get('SUPPORT__REPLY') ?></button>
+                        <button class="btn btn-primary" type="submit"><?= $Lang->get('SUPPORT__REPLY') ?></button>
                     </form>
                     <?php }else{ ?>
-                        <div class="alert alert-danger"><?= $Lang->get('SUPPORT__CLOSTICKETWARNING') ?></div>
+                        <div class="alert alert-warning"><?= $Lang->get('SUPPORT__CLOSTICKETWARNING') ?></div>
                     <?php }?>
                 </div>
             </div>
